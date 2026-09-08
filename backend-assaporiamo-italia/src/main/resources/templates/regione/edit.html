@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="it" xmlns:th="http://thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <th:block
+      th:replace="~{fragments/headScript :: head('Modifica Regione')}"
+    />
+  </head>
+  <body class="bg-light">
+    <th:block th:replace="~{fragments/navbar :: navbarBase(false)}" />
+
+    <div class="container py-5">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <a
+          th:href="@{/backoffice/homepage}"
+          class="btn btn-outline-secondary btn-sm px-4 fw-semibold shadow-sm"
+        >
+          Annulla e Torna alla home
+        </a>
+      </div>
+
+      <header class="mb-4">
+        <h1 class="h2 fw-bold text-primary mb-0">
+          Modifica regione [[${regione.nome}]]
+        </h1>
+      </header>
+
+      <form
+        th:action="@{|/backoffice/regioni/${regione.slug}/edit|}"
+        method="POST"
+        class="row g-4"
+        th:object="${regione}"
+      >
+        <input type="hidden" th:field="*{nome}" />
+        <input type="hidden" th:field="*{svg_coordinate}" />
+        <div class="col-12">
+          <main class="card shadow-sm p-4 bg-white rounded-3 h-100">
+            <h2 class="h5 fw-bold text-dark border-bottom pb-2 mb-3">
+              Informazioni Principali
+            </h2>
+
+            <div class="mb-0">
+              <label
+                for="urlImmagine"
+                class="form-label text-muted small fw-bold"
+                >URL Immagine di Copertina</label
+              >
+              <input
+                type="text"
+                id="urlImmagine"
+                th:field="*{urlImmagine}"
+                class="form-control font-monospace small text-muted"
+                th:classappend="${#fields.hasErrors('urlImmagine')} ? 'is-invalid'"
+                placeholder="https://example.com"
+                required
+              />
+              <div
+                class="invalid-feedback d-block"
+                th:if="${#fields.hasErrors('urlImmagine')}"
+                th:errors="*{urlImmagine}"
+              >
+                Errore URL Immagine
+              </div>
+            </div>
+            <div>
+              <h2 class="h5 fw-bold text-dark border-bottom pb-2 mb-3">
+                Descrizione Completa
+              </h2>
+              <div class="mb-0">
+                <textarea
+                  id="descrizione"
+                  th:field="*{descrizione}"
+                  rows="9"
+                  class="form-control text-muted small lh-base"
+                  th:classappend="${#fields.hasErrors('descrizione')} ? 'is-invalid'"
+                  placeholder="Inserisci la descrizione del prodotto tipico ..."
+                  required
+                ></textarea>
+                <div
+                  class="invalid-feedback d-block"
+                  th:if="${#fields.hasErrors('descrizione')}"
+                  th:errors="*{descrizione}"
+                >
+                  Errore Descrizione
+                </div>
+              </div>
+            </div>
+          </main>
+          <div class="mt-4 pt-3 border-top">
+            <button
+              type="submit"
+              class="btn btn-primary btn-lg w-100 py-2 shadow-sm fw-bold"
+            >
+              Salva Modifiche
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <th:block th:replace="~{fragments/headScript :: script}" />
+  </body>
+</html>

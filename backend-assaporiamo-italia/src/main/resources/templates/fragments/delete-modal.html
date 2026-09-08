@@ -1,0 +1,61 @@
+<th:block th:fragment="delete-modal(elemento, tipo)" th:object="${elemento}">
+  <!-- Modal di conferma eliminazione -->
+  <div
+    class="modal fade"
+    th:id="|delete-${tipo}-*{slug}|"
+    tabindex="-1"
+    th:aria-labelledby="|delete-${tipo}-*{slug}-label|"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0 pb-0">
+          <h1
+            class="modal-title fs-5 text-danger"
+            th:id="|delete-${tipo}-*{slug}-label|"
+          >
+            Conferma Eliminazione
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body py-4">
+          <th:block
+            th:if="${tipo == 'prodotto'}"
+            th:text="'Sei sicuro di voler eliminare definitivamente questo Prodotto Tipico ?'"
+          ></th:block>
+          <th:block
+            th:if="${tipo == 'vino'}"
+            th:text="'Sei sicuro di voler eliminare definitivamente questo Vino ?'"
+          ></th:block>
+          <strong>[[*{nome}]]</strong>?<br> Questa azione non può essere annullata.
+        </div>
+        <div class="modal-footer border-0 pt-0">
+          <button type="button" class="btn btn-light" data-bs-dismiss="modal">
+            Annulla
+          </button>
+
+          <form
+            th:if="${tipo == 'prodotto'}"
+            th:action="@{/backoffice/prodotti/{slug}/delete(slug=*{slug})}"
+            method="POST"
+          >
+            <button type="submit" class="btn btn-danger">Elimina</button>
+          </form>
+
+          <form
+            th:if="${tipo == 'vino'}"
+            th:action="@{/backoffice/vini/{slug}/delete(slug=*{slug})}"
+            method="post"
+          >
+            <button type="submit" class="btn btn-danger">Elimina</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</th:block>

@@ -1,0 +1,25 @@
+.scrollbar-stile::-webkit-scrollbar {
+  height: 6px; /* Spessore della barra orizzontale */
+}
+
+/* Il binario di fondo alla barra */
+.scrollbar-stile::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 100px;
+}
+
+/* La barra che viene trascinata */
+.scrollbar-stile::-webkit-scrollbar-thumb {
+  background: #cbd5e1; /* Un grigio morbido (Slate 300 di Tailwind) */
+  border-radius: 100px;
+}
+
+/* Cambia colore quando ci passa sopra con il mouse */
+.scrollbar-stile::-webkit-scrollbar-thumb:hover {
+  background: #ea580c;
+}
+
+.scrollbar-stile {
+  scrollbar-width: thin;
+  scrollbar-color: #cbd5e1 #f1f5f9;
+}

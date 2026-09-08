@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="it" xmlns:th="http://thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <th:block
+      th:replace="~{fragments/headScript :: head('Error 500 - Internal Server')}"
+    />
+  </head>
+
+  <body class="bg-light d-flex align-items-center vh-100">
+    <div class="container text-center">
+      <div class="card shadow p-5 mx-auto" style="max-width: 500px">
+        <h1 class="text-danger display-1 fw-bold">500</h1>
+        <h2 class="mb-4">Error Internal Server</h2>
+      </div>
+    </div>
+  </body>
+</html>

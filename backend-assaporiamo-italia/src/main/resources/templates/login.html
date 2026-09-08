@@ -1,0 +1,116 @@
+<!doctype html>
+<html
+  lang="it"
+  xmlns:th="http://thymeleaf.org"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <th:block th:replace="~{fragments/headScript :: head('Accedi')}" />
+  </head>
+  <body class="bg-light d-flex align-items-center justify-content-center">
+    <div class="container my-5 text-center" style="max-width: 450px">
+      <!-- NUOVO TITOLO INSERITO QUI (Prima della card) -->
+      <h1 class="display-5 fw-bold text-primary mb-4">
+        BackOffice
+        <span class="text-secondary d-block fs-3 mt-1"
+          >"Assaporiamo l'Italia"</span
+        >
+      </h1>
+
+      <div class="card shadow-sm border-0 p-4 bg-white rounded-3 text-start">
+        <div class="card-body">
+          <h2 class="card-title text-center mb-4 fw-bold text-dark">
+            Area Amministrativa
+          </h2>
+
+          <div
+            th:if="${param.error}"
+            class="alert alert-danger alert-dismissible fade show"
+            role="alert"
+          >
+            <small>Username o password non corretti. Riprova.</small>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <div
+            th:if="${param.logout}"
+            class="alert alert-success alert-dismissible fade show"
+            role="alert"
+          >
+            <small>Disconnessione completata con successo.</small>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="alert"
+              aria-label="Close"
+            ></button>
+          </div>
+
+          <form th:action="@{/login}" method="post">
+            <div class="mb-3">
+              <label
+                for="username"
+                class="form-label small fw-semibold text-secondary"
+                >Nome Utente</label
+              >
+              <input
+                type="text"
+                id="username"
+                name="username"
+                class="form-control form-control-lg fs-6"
+                placeholder="Inserisci il tuo username"
+                required
+                autocomplete="off"
+              />
+            </div>
+
+            <div class="mb-4">
+              <label
+                for="password"
+                class="form-label small fw-semibold text-secondary"
+                >Password</label
+              >
+              <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-control form-control-lg fs-6"
+                placeholder="Inserisci la tua password"
+                required
+              />
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-primary btn-lg w-100 fs-6 fw-bold shadow-sm"
+            >
+              Accedi al pannello
+            </button>
+            <div class="text-center my-3 text-muted small position-relative">
+              <hr class="m-0" />
+              <span
+                class="px-2 bg-white position-absolute top-50 start-50 translate-middle"
+                >oppure</span
+              >
+            </div>
+
+            <!-- NUOVO PULSANTE PER IL VISITATORE -->
+            <a
+              th:href="@{/}"
+              class="btn btn-outline-secondary btn-lg w-100 fs-6 fw-bold shadow-sm"
+            >
+              Visita come visitatore
+            </a>
+          </form>
+        </div>
+      </div>
+    </div>
+    <th:block th:replace="~{fragments/headScript :: script}" />
+  </body>
+</html>

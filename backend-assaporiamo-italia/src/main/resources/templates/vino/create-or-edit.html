@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="it" xmlns:th="http://thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <th:block
+      th:replace="~{fragments/headScript :: head(${edit} ? 'Modifica Vino' :  'Nuovo Vino')}"
+    />
+  </head>
+  <body class="bg-light">
+    <th:block th:replace="~{fragments/navbar :: navbarBase(false)}" />
+
+    <div class="container py-5">
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <a
+          th:href="@{/backoffice/vini/all}"
+          class="btn btn-outline-secondary btn-sm px-4 fw-semibold shadow-sm"
+        >
+          Annulla e Torna all'Elenco
+        </a>
+      </div>
+
+      <header class="mb-4">
+        <h1
+          class="h2 fw-bold text-primary mb-0"
+          th:text="${edit} ? 'Modifica Vino' : 'Nuovo Vino'"
+        >
+          Titolo pagina se create o edit
+        </h1>
+      </header>
+
+      <form
+        th:action="${edit} ? @{|/backoffice/vini/${nuovoVino.slug}/edit|} : @{/backoffice/vini/create}"
+        th:object="${nuovoVino}"
+        method="POST"
+        class="row g-4"
+      >
+        <th:block
+          th:replace="~{fragments/corpoForm :: corpoForm('Vino', ${listaRegioni}, ${listaTipologie})}"
+        />
+      </form>
+    </div>
+
+    <th:block th:replace="~{fragments/headScript :: script}" />
+  </body>
+</html>

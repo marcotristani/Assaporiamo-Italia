@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="it" xmlns:th="http://thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <th:block th:replace="~{fragments/headScript :: head('Homepage')}" />
+  </head>
+  <body class="bg-light" th:object="${regione}">
+    <th:block th:replace="~{fragments/navbar :: navbarBase(false)}" />
+
+    <div class="container py-5">
+      <header class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h2 fw-bold text-primary mb-0">[[*{nome}]]</h1>
+        <a
+          sec:authorize="hasAuthority('ADMIN')"
+          th:href="@{/backoffice/regioni/{slug}/edit(slug=*{slug})}"
+          class="btn btn-warning btn-sm px-4 fw-bold shadow-sm"
+        >
+          Modifica
+        </a>
+      </header>
+
+      <div class="row g-4">
+        <div class="col-12 col-lg-7">
+          <section class="card shadow-sm p-4 bg-white rounded-3 mb-4">
+            <h2 class="h5 fw-bold text-dark border-bottom pb-2 mb-3">
+              Descrizione
+            </h2>
+            <p
+              class="text-muted small lh-base mb-0 bg-light p-3 rounded border"
+            >
+              [[ *{descrizione} ]]
+            </p>
+          </section>
+          <section class="card shadow-sm p-4 bg-white rounded-3 mb-4">
+            <h2 class="h5 fw-bold text-dark border-bottom pb-2 mb-3">
+              Dettagli
+            </h2>
+
+            <dl class="row mb-0">
+              <dt class="col-sm-4 text-muted fw-normal">
+                Totale Prodotti Tipici
+              </dt>
+              <dd
+                class="col-sm-8 fw-semibold font-monospace"
+                th:text="${#lists.size(regione.prodottiTipici)}"
+              >
+                0
+              </dd>
+
+              <dt class="col-sm-4 text-muted fw-normal">Totale Vini</dt>
+              <dd
+                class="col-sm-8 fw-semibold font-monospace"
+                th:text="${#lists.size(regione.vini)}"
+              >
+                0
+              </dd>
+            </dl>
+          </section>
+        </div>
+
+        <div class="col-12 col-lg-5">
+          <div class="card shadow-sm p-4 bg-white rounded-3 h-100">
+            <h2 class="h5 fw-bold text-dark border-bottom pb-2 mb-3">
+              Immagine Allegata
+            </h2>
+            <div class="text-center mb-3 bg-light p-2 rounded border">
+              <img
+                th:src="*{urlImmagine}"
+                th:alt="*{nome}"
+                class="img-fluid rounded border object-fit-contain bg-white"
+                style="max-height: 220px"
+              />
+            </div>
+            <div class="mb-0">
+              <span class="d-block text-muted small mb-1">URL Immagine:</span>
+              <a
+                th:href="*{urlImmagine}"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-break font-monospace small text-primary"
+              >
+                [[*{urlImmagine}]]
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="row g-4 mt-2">
+        <div class="col-12 col-xl-6">
+          <section class="card shadow-sm p-4 bg-white rounded-3 h-100">
+            <div
+              class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3"
+            >
+              <h3 class="h5 fw-bold text-dark mb-0">Prodotti della Regione</h3>
+              <a
+                th:href="@{/backoffice/prodotti/regione/{slug}(slug=*{slug})}"
+                class="btn btn-sm btn-outline-primary fw-semibold"
+              >
+                Gestisci Prodotti
+              </a>
+            </div>
+
+            <div
+              th:if="${not #lists.isEmpty(regione.prodottiTipici)}"
+              class="table-responsive"
+            >
+              <table
+                class="table table-striped table-hover align-middle border mb-0 small"
+              >
+                <thead class="table-light text-uppercase fs-7 text-muted">
+                  <tr>
+                    <th>Nome Prodotto</th>
+                    <th class="text-end" style="width: 120px">Azioni</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr
+                    th:each="prodotto : ${regione.prodottiTipici}"
+                    th:object="${prodotto}"
+                  >
+                    <td class="fw-bold text-dark">[[*{nome}]]</td>
+                    <td class="text-end">
+                      <a
+                        th:href="@{/backoffice/prodotti/dettaglio/{slugProdotto}(slugProdotto=*{slug})}"
+                        class="btn btn-sm btn-outline-secondary w-100"
+                      >
+                        Apri Scheda
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div
+              th:if="${#lists.isEmpty(regione.prodottiTipici)}"
+              class="text-center py-4 text-muted border border-dashed rounded bg-light my-auto"
+            >
+              Nessun prodotto tipico associato a questa regione.
+            </div>
+          </section>
+        </div>
+
+        <div class="col-12 col-xl-6">
+          <section class="card shadow-sm p-4 bg-white rounded-3 h-100">
+            <div
+              class="d-flex justify-content-between align-items-center border-bottom pb-2 mb-3"
+            >
+              <h3 class="h5 fw-bold text-dark mb-0">Vini della Regione</h3>
+              <a
+                th:href="@{/backoffice/vini/regione/{slug}(slug=*{slug})}"
+                class="btn btn-sm btn-outline-primary fw-semibold"
+              >
+                Gestisci Vini
+              </a>
+            </div>
+
+            <div
+              th:if="${not #lists.isEmpty(regione.vini)}"
+              class="table-responsive"
+            >
+              <table
+                class="table table-striped table-hover align-middle border mb-0 small"
+              >
+                <thead class="table-light text-uppercase fs-7 text-muted">
+                  <tr>
+                    <th>Nome Vino</th>
+                    <th class="text-end" style="width: 120px">Azioni</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr th:each="vino : ${regione.vini}" th:object="${vino}">
+                    <td class="fw-bold text-dark">[[*{nome}]]</td>
+                    <td class="text-end">
+                      <a
+                        th:href="@{/backoffice/vini/dettaglio/{slugVino}(slugVino=*{slug})}"
+                        class="btn btn-sm btn-outline-secondary w-100"
+                      >
+                        Apri Scheda
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div
+              th:if="${#lists.isEmpty(regione.vini)}"
+              class="text-center py-4 text-muted border border-dashed rounded bg-light my-auto"
+            >
+              Nessun vino associato a questa regione.
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <th:block th:replace="~{fragments/headScript :: script}" />
+  </body>
+</html>

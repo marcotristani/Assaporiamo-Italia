@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="it" xmlns:th="http://thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <th:block th:replace="~{fragments/headScript :: head('Homepage')}" />
+  </head>
+  <body class="bg-light">
+    <th:block th:replace="~{fragments/navbar :: navbarBase(true)}" />
+    <div class="container py-5">
+      <header class="text-center mb-5">
+        <h1 class="display-5 fw-bold text-primary mb-3">
+          BackOffice <span class="text-secondary">"Assaporiamo l'Italia"</span>
+        </h1>
+        <p class="lead text-muted mx-auto" style="max-width: 800px">
+          Gestisci i dati della pagina ufficiale in modo fluido. Se abilitato,
+          puoi aggiungere, eliminare o modificare prodotti e vini.
+        </p>
+      </header>
+
+      <div class="row g-3 mb-4">
+        <div class="col-12 col-md-6">
+          <a
+            th:href="@{/backoffice/prodotti/all}"
+            class="btn btn-primary btn-lg w-100 py-3 shadow-sm d-flex align-items-center justify-content-center gap-2 fw-bold"
+          >
+            Visualizza Tutti i Prodotti
+          </a>
+        </div>
+        <div class="col-12 col-md-6">
+          <a
+            th:href="@{/backoffice/vini/all}"
+            class="btn btn-success btn-lg w-100 py-3 shadow-sm d-flex align-items-center justify-content-center gap-2 fw-bold"
+          >
+            Visualizza Tutti i Vini
+          </a>
+        </div>
+      </div>
+
+      <main class="card shadow-sm p-4 bg-white rounded-3">
+        <div class="border-bottom pb-3 mb-4">
+          <h2 class="h4 fw-bold text-dark mb-1">Filtra per Regione</h2>
+          <p class="text-muted small mb-0">
+            Seleziona una regione specifica per visualizzare solo i suoi
+            prodotti e vini.
+          </p>
+        </div>
+        <div class="row row-cols-1 row-cols-sm-3 row-cols-lg-5 g-3">
+          <div
+            class="col"
+            th:each="regione : ${regioni}"
+            th:object="${regione}"
+          >
+            <a
+              th:href="@{/backoffice/regioni/{slug}(slug=*{slug})}"
+              class="btn btn-outline-primary w-100 py-3 fw-semibold text-capitalize shadow-sm d-flex align-items-center justify-content-center text-decoration-none"
+            >
+              [[*{nome}]]
+            </a>
+          </div>
+        </div>
+      </main>
+    </div>
+    <th:block th:replace="~{fragments/headScript :: script}" />
+  </body>
+</html>

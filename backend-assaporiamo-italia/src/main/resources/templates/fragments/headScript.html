@@ -1,0 +1,13 @@
+<th:block th:fragment="head(titleHead)">
+  <title th:text="${titleHead}">Document</title>
+  <link
+    rel="stylesheet"
+    th:href="@{/webjars/bootstrap/5.3.3/css/bootstrap.min.css}"
+  />
+</th:block>
+
+<th:block th:fragment="script">
+  <script
+    th:src="@{/webjars/bootstrap/5.3.3/js/bootstrap.bundle.min.js}"
+  ></script>
+</th:block>

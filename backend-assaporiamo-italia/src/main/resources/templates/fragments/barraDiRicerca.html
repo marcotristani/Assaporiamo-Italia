@@ -1,0 +1,128 @@
+<th:block th:fragment="corpoFormBarraRicerca(tipoRicercato)">
+  <div class="input-group">
+    <input
+      type="text"
+      name="ricerca"
+      th:value="${param.ricerca}"
+      class="form-control"
+      th:placeholder="'Cerca un '+ ${tipoRicercato}"
+    />
+    <button class="btn btn-primary fw-bold" type="submit">Cerca</button>
+  </div>
+</th:block>
+
+<th:block
+  th:fragment="barraDiRicercaProdotti(categoriaSelezionata, regioneSelezionata)"
+>
+  <th:block
+    th:if="${regioneSelezionata == null && categoriaSelezionata == null} "
+  >
+    <form
+      th:action="@{/backoffice/prodotti/all}"
+      method="get"
+      class="d-flex gap-2 px-5 py-2"
+    >
+      <th:block
+        th:replace="~{fragments/barraDiRicerca :: corpoFormBarraRicerca('Prodotto Tipico')}"
+      />
+    </form>
+  </th:block>
+
+  <th:block
+    th:if="${regioneSelezionata == null && categoriaSelezionata != null} "
+  >
+    <form
+      th:action="@{/backoffice/prodotti/categoria/{slug}(slug=${categoriaSelezionata.slug})}"
+      method="get"
+      class="d-flex gap-2 px-5 py-2"
+    >
+      <th:block
+        th:replace="~{fragments/barraDiRicerca :: corpoFormBarraRicerca('Prodotto Tipico')}"
+      />
+    </form>
+  </th:block>
+  <th:block
+    th:if="${regioneSelezionata != null && categoriaSelezionata == null} "
+  >
+    <form
+      th:action="@{/backoffice/prodotti/regione/{slug}(slug=${regioneSelezionata.slug})}"
+      method="get"
+      class="d-flex gap-2 px-5 py-2"
+    >
+      <th:block
+        th:replace="~{fragments/barraDiRicerca :: corpoFormBarraRicerca('Prodotto Tipico')}"
+      />
+    </form>
+  </th:block>
+  <th:block
+    th:if="${regioneSelezionata != null && categoriaSelezionata != null} "
+  >
+    <form
+      th:action="@{/backoffice/prodotti/categoria/{slugCategoria}/regione/{slugRegione}(slugCategoria=${categoriaSelezionata.slug}, slugRegione=${regioneSelezionata.slug})}"
+      method="get"
+      class="d-flex gap-2 px-5 py-2"
+    >
+      <th:block
+        th:replace="~{fragments/barraDiRicerca :: corpoFormBarraRicerca('Prodotto Tipico')}"
+      />
+    </form>
+  </th:block>
+</th:block>
+
+<th:block
+  th:fragment="barraRicercaVini(tipologiaSelezionata, regioneSelezionata)"
+>
+  <th:block
+    th:if="${regioneSelezionata == null && tipologiaSelezionata == null} "
+  >
+    <form
+      th:action="@{/backoffice/vini/all}"
+      method="get"
+      class="d-flex gap-2 px-5 py-2"
+    >
+      <th:block
+        th:replace="~{fragments/barraDiRicerca :: corpoFormBarraRicerca('Vino')}"
+      />
+    </form>
+  </th:block>
+
+  <th:block
+    th:if="${regioneSelezionata == null && tipologiaSelezionata != null} "
+  >
+    <form
+      th:action="@{/backoffice/vini/tipologia/{slug}(slug=${tipologiaSelezionata.slug})}"
+      method="get"
+      class="d-flex gap-2 px-5 py-2"
+    >
+      <th:block
+        th:replace="~{fragments/barraDiRicerca :: corpoFormBarraRicerca('Vino')}"
+      />
+    </form>
+  </th:block>
+  <th:block
+    th:if="${regioneSelezionata != null && tipologiaSelezionata == null} "
+  >
+    <form
+      th:action="@{/backoffice/vini/regione/{slug}(slug=${regioneSelezionata.slug})}"
+      method="get"
+      class="d-flex gap-2 px-5 py-2"
+    >
+      <th:block
+        th:replace="~{fragments/barraDiRicerca :: corpoFormBarraRicerca('Vino')}"
+      />
+    </form>
+  </th:block>
+  <th:block
+    th:if="${regioneSelezionata != null && tipologiaSelezionata != null} "
+  >
+    <form
+      th:action="@{/backoffice/vini/tipologia/{slugTipologia}/regione/{slugRegione}(slugTipologia=${tipologiaSelezionata.slug}, slugRegione=${regioneSelezionata.slug})}"
+      method="get"
+      class="d-flex gap-2 px-5 py-2"
+    >
+      <th:block
+        th:replace="~{fragments/barraDiRicerca :: corpoFormBarraRicerca('Vino')}"
+      />
+    </form>
+  </th:block>
+</th:block>

@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="it" xmlns:th="http://thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <th:block th:replace="~{fragments/headScript :: head('Vini')}" />
+  </head>
+  <body class="bg-light">
+    <th:block
+      th:replace="~{fragments/navbar :: navbarVini(${listaTipologie},${tipologiaSelezionata}, ${regioneSelezionata} )}"
+    />
+
+    <div class="container py-5">
+      <header class="text-center mb-5">
+        <th:block th:if="${regioneSelezionata == null}">
+          <h1 class="display-5 fw-bold text-primary mb-3">Vini</h1>
+        </th:block>
+
+        <th:block th:unless="${regioneSelezionata == null}">
+          <h1 class="display-5 fw-bold text-primary mb-3">
+            Vini [[${regioneSelezionata.nome}]]
+          </h1>
+        </th:block>
+        <th:block th:if="${tipologiaSelezionata == null}">
+          <p class="lead text-muted mx-auto" style="max-width: 800px">
+            Questa è la lista di tutti i vini
+          </p>
+        </th:block>
+        <th:block th:if="${tipologiaSelezionata != null}">
+          <p class="lead text-muted mx-auto" style="max-width: 800px">
+            Questa è la lista dei vini della categoria
+            [[${tipologiaSelezionata.nome}]]
+          </p>
+        </th:block>
+        <th:block
+          th:replace="~{fragments/barraDiRicerca :: barraRicercaVini( ${tipologiaSelezionata}, ${regioneSelezionata})}"
+        />
+      </header>
+      <div class="d-flex justify-content-between mb-3">
+        <a
+          sec:authorize="hasAuthority('ADMIN')"
+          th:href="@{/backoffice/vini/create}"
+          class="btn btn-warning btn-sm px-4 fw-bold shadow-sm"
+        >
+          Aggiungi un Vino
+        </a>
+
+        <th:block
+          th:replace="~{fragments/bottoneOrdinamento :: bottoneOrdinamentoVini(${tipologiaSelezionata}, ${regioneSelezionata})}"
+        />
+      </div>
+
+      <div class="table-responsive bg-white shadow-sm rounded">
+        <table class="table table-hover table-striped mb-0">
+          <thead class="table-primary">
+            <tr>
+              <th scope="col" class="py-3">Nome Vino</th>
+              <th scope="col" class="py-3">Regione</th>
+              <th scope="col" class="py-3">Tipologia</th>
+              <th scope="col" class="py-3 text-center">Azioni</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="vino : ${vini}" th:object="${vino}">
+              <td class="align-middle fw-semibold">[[*{nome}]]</td>
+              <td class="align-middle">
+                <a
+                  th:href="@{/backoffice/regioni/{slugRegione}(slugRegione=*{regione.slug})}"
+                  class="text-decoration-none"
+                  >[[*{regione.nome}]]</a
+                >
+              </td>
+              <td class="align-middle">[[*{tipologia.nome}]]</td>
+              <td class="align-middle text-center">
+                <div class="btn-group btn-group-sm" role="group">
+                  <a
+                    th:href="@{/backoffice/vini/dettaglio/{slugVino}(slugVino=*{slug})}"
+                    class="btn btn-outline-info"
+                    title="Vedi Dettaglio"
+                  >
+                    Visualizza
+                  </a>
+
+                  <a
+                    sec:authorize="hasAuthority('ADMIN')"
+                    th:href="@{/backoffice/vini/{slugVino}/edit(slugVino=*{slug})}"
+                    class="btn btn-outline-warning"
+                    title="Modifica Vino"
+                  >
+                    Modifica
+                  </a>
+
+                  <button
+                    sec:authorize="hasAuthority('ADMIN')"
+                    type="submit"
+                    class="btn btn-outline-danger"
+                    data-bs-toggle="modal"
+                    th:data-bs-target="'#delete-vino-' + *{slug}"
+                  >
+                    Elimina
+                  </button>
+                  <div
+                    th:replace="~{fragments/delete-modal :: delete-modal(${vino}, 'vino')}"
+                  ></div>
+                </div>
+              </td>
+            </tr>
+            <tr th:if="${#lists.isEmpty(vini)}">
+              <td colspan="4" class="text-center text-muted py-4">
+                Nessun vino trovato.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <th:block th:replace="~{fragments/headScript :: script}" />
+  </body>
+</html>

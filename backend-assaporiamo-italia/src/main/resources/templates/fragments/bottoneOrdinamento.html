@@ -1,0 +1,97 @@
+<th:block
+  th:fragment="bottoneOrdinamentoProdotti(categoriaSelezionata, regioneSelezionata)"
+>
+  <th:block
+    th:if="${regioneSelezionata == null && categoriaSelezionata == null} "
+  >
+    <a
+      th:href="@{/backoffice/prodotti/all(order=${param.order != null && param.order[0] == 'alfabetico' ? null : 'alfabetico'}, ricerca=${param.ricerca != null ? param.ricerca[0] : null})}"
+      class="btn btn-outline-primary d-flex align-items-center gap-2 shadow-sm"
+      th:classappend="${param.order != null && param.order[0] == 'alfabetico'} ? 'active' : ''"
+    >
+      <span>Ordina A-Z</span>
+    </a>
+  </th:block>
+  <th:block
+    th:if="${regioneSelezionata == null && categoriaSelezionata != null} "
+  >
+    <a
+      th:href=" @{/backoffice/prodotti/categoria/{slug}(slug=${categoriaSelezionata.slug}, order=${param.order != null && param.order[0] == 'alfabetico' ? null : 'alfabetico'}, ricerca=${param.ricerca != null ? param.ricerca[0] : null})}"
+      class="btn btn-outline-primary d-flex align-items-center gap-2 shadow-sm"
+      th:classappend="${param.order != null && param.order[0] == 'alfabetico'} ? 'active' : ''"
+    >
+      <span>Ordina A-Z</span>
+    </a>
+  </th:block>
+  <th:block
+    th:if="${regioneSelezionata != null && categoriaSelezionata == null} "
+  >
+    <a
+      th:href=" @{/backoffice/prodotti/regione/{slug}(slug=${regioneSelezionata.slug}, order=${param.order != null && param.order[0] == 'alfabetico' ? null : 'alfabetico'}, ricerca=${param.ricerca != null ? param.ricerca[0] : null})}"
+      class="btn btn-outline-primary d-flex align-items-center gap-2 shadow-sm"
+      th:classappend="${param.order != null && param.order[0] == 'alfabetico'} ? 'active' : ''"
+    >
+      <span>Ordina A-Z</span>
+    </a>
+  </th:block>
+  <th:block
+    th:if="${regioneSelezionata != null && categoriaSelezionata != null} "
+  >
+    <a
+      th:href="@{/backoffice/prodotti/categoria/{slugCategoria}/regione/{slugRegione}(slugCategoria=${categoriaSelezionata.slug}, slugRegione=${regioneSelezionata.slug}, order=${param.order != null && param.order[0] == 'alfabetico' ? null : 'alfabetico'}, ricerca=${param.ricerca != null ? param.ricerca[0] : null})}"
+      class="btn btn-outline-primary d-flex align-items-center gap-2 shadow-sm"
+      th:classappend="${param.order != null && param.order[0] == 'alfabetico'} ? 'active' : ''"
+    >
+      <span>Ordina A-Z</span>
+    </a>
+  </th:block>
+</th:block>
+
+<th:block
+  th:fragment="bottoneOrdinamentoVini(tipologiaSelezionata, regioneSelezionata)"
+>
+  <th:block
+    th:if="${regioneSelezionata == null && tipologiaSelezionata == null} "
+  >
+    <a
+      th:href="@{/backoffice/vini/all(order=${param.order != null && param.order[0] == 'alfabetico' ? null : 'alfabetico'}, ricerca=${param.ricerca != null ? param.ricerca[0] : null})}"
+      class="btn btn-outline-primary d-flex align-items-center gap-2 shadow-sm"
+      th:classappend="${param.order != null && param.order[0] == 'alfabetico'} ? 'active' : ''"
+    >
+      <span>Ordina A-Z</span>
+    </a>
+  </th:block>
+  <th:block
+    th:if="${regioneSelezionata == null && tipologiaSelezionata != null} "
+  >
+    <a
+      th:href=" @{/backoffice/vini/tipologia/{slug}(slug=${tipologiaSelezionata.slug}, order=${param.order != null && param.order[0] == 'alfabetico' ? null : 'alfabetico'}, ricerca=${param.ricerca != null ? param.ricerca[0] : null})}"
+      class="btn btn-outline-primary d-flex align-items-center gap-2 shadow-sm"
+      th:classappend="${param.order != null && param.order[0] == 'alfabetico'} ? 'active' : ''"
+    >
+      <span>Ordina A-Z</span>
+    </a>
+  </th:block>
+  <th:block
+    th:if="${regioneSelezionata != null && tipologiaSelezionata == null} "
+  >
+    <a
+      th:href=" @{/backoffice/vini/regione/{slug}(slug=${regioneSelezionata.slug}, order=${param.order != null && param.order[0] == 'alfabetico' ? null : 'alfabetico'}, ricerca=${param.ricerca != null ? param.ricerca[0] : null})}"
+      class="btn btn-outline-primary d-flex align-items-center gap-2 shadow-sm"
+      th:classappend="${param.order != null && param.order[0] == 'alfabetico'} ? 'active' : ''"
+    >
+      <span>Ordina A-Z</span>
+    </a>
+  </th:block>
+  <th:block
+    th:if="${regioneSelezionata != null && tipologiaSelezionata != null} "
+  >
+    <a
+      th:href="@{/backoffice/vini/tipologia/{slugTipologia}/regione/{slugRegione}(slugTipologia=${tipologiaSelezionata.slug}, slugRegione=${regioneSelezionata.slug}, order=${param.order != null && param.order[0] == 'alfabetico' ? null : 'alfabetico'}, ricerca=${param.ricerca != null ? param.ricerca[0] : null})}"
+      class="btn btn-outline-primary d-flex align-items-center gap-2 shadow-sm"
+      th:classappend="${param.order != null && param.order[0] == 'alfabetico'} ? 'active' : ''"
+    >
+      <span>Ordina A-Z</span>
+    </a>
+  </th:block>
+</th:block>
