@@ -1,10 +1,11 @@
-# 🍷 Assaporiamo l'Italia — Progetto Full‑Stack Enogastronomico
+# 🍷 Assaporiamo l’Italia  
+### Full‑Stack Enogastronomico
+![React](https://img.shields.io/badge/React-1a1a1a?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Tailwind CSS](https://img.shields.io/badge/TailwindCSS-1a1a1a?style=for-the-badge&logo=tailwind-css&logoColor=38B2AC)
+![Java](https://img.shields.io/badge/Java-1a1a1a?style=for-the-badge&logo=openjdk&logoColor=orange)
+![Spring Boot](https://img.shields.io/badge/SpringBoot-1a1a1a?style=for-the-badge&logo=springboot&logoColor=6DB33F)
+![Spring Security](https://img.shields.io/badge/SpringSecurity-1a1a1a?style=for-the-badge&logo=springsecurity&logoColor=6DB33F)
 
-![Frontend React](https://img.shields.io/badge/Frontend-React-61DAFB?logo=react&logoColor=white&style=for-the-badge)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-grey?style=for-the-badge&logo=tailwind-css&logoColor=38B2AC)
-![Backend Java](https://img.shields.io/badge/Java-orange?style=flat&logo=openjdk)
-![Spring Boot](https://img.shields.io/badge/springboot-000000?style=for-the-badge&logo=springboot&logoColor=green)
-![Spring Security](http://img.shields.io/badge/Spring%20Security-black?logo=springsecurity)
 
 Assaporiamo l'Italia è un'applicazione **full‑stack** concepita come un viaggio virtuale attraverso la cultura culinaria italiana. L'applicazione permette di effettuare un vero e proprio tour enogastronomico interattivo: partendo da una mappa o da una selezione regionale, l'utente può scoprire i prodotti tipici, le ricette tradizionali e i vini pregiati caratteristici di ogni specifica regione.
 
