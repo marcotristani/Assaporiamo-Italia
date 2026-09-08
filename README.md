@@ -2,9 +2,9 @@
 
 ![Frontend React](https://img.shields.io/badge/Frontend-React-61DAFB?logo=react&logoColor=white&style=for-the-badge)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-grey?style=for-the-badge&logo=tailwind-css&logoColor=38B2AC)
-![Backend Java](https://shields.io)
-![Spring Boot](https://shields.io)
-![Spring Security](https://shields.io)
+![Backend Java](https://img.shields.io/badge/Java-orange?style=flat&logo=openjdk)
+![Spring Boot](https://img.shields.io/badge/springboot-000000?style=for-the-badge&logo=springboot&logoColor=green)
+![Spring Security](http://img.shields.io/badge/Spring%20Security-black?logo=springsecurity)
 
 Assaporiamo l'Italia è un'applicazione **full‑stack** concepita come un viaggio virtuale attraverso la cultura culinaria italiana. L'applicazione permette di effettuare un vero e proprio tour enogastronomico interattivo: partendo da una mappa o da una selezione regionale, l'utente può scoprire i prodotti tipici, le ricette tradizionali e i vini pregiati caratteristici di ogni specifica regione.
 
