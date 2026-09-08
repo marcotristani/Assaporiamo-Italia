@@ -1,7 +1,7 @@
 # 🍷 Assaporiamo l'Italia — Progetto Full‑Stack Enogastronomico
 
 ![Frontend React](https://img.shields.io/badge/Frontend-React-61DAFB?logo=react&logoColor=white&style=for-the-badge)
-![Tailwind CSS](https://shields.io)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-grey?style=for-the-badge&logo=tailwind-css&logoColor=38B2AC)
 ![Backend Java](https://shields.io)
 ![Spring Boot](https://shields.io)
 ![Spring Security](https://shields.io)
@@ -43,7 +43,7 @@ Questa repository è strutturata come una **monorepo** che organizza in modo pul
 Il progetto è organizzato in due macro-aree indipendenti ma coordinate:
 
 ```text
-assaporiamo-l-italia/
+Assaporiamo-Italia/
 ├── frontend/      # Applicazione React + Tailwind CSS
 └── backend/       # Applicazione Java + Spring Boot (Maven)
 ```
